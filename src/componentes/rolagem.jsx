@@ -84,3 +84,54 @@ export function Profundidade({ children, className = "", forca = 36 }) {
     </div>
   );
 }
+
+// Troca a imagem parada conforme as linhas divisórias da lista passam por ela.
+// Na ida (rolando para baixo), a linha entre dois itens precisa chegar à METADE da
+// imagem (50% da altura, medido de cima) para avançar. Na volta, a mesma linha
+// precisa descer até 75% da altura da imagem para voltar ao item anterior.
+// A diferença entre os dois pontos evita que a imagem fique trocando sem parar.
+export function useTrocaPorLinha(quantidade, ida = 0.5, volta = 0.75) {
+  const itens = useRef([]);
+  const imagem = useRef(null);
+  const atual = useRef(0);
+  const [ativo, setAtivo] = useState(0);
+
+  useEffect(() => {
+    let quadro = 0;
+
+    const medir = () => {
+      quadro = 0;
+      const caixa = imagem.current && imagem.current.getBoundingClientRect();
+      // No celular a imagem parada não aparece: não há o que trocar.
+      if (!caixa || caixa.height === 0) return;
+      const pontoIda = caixa.top + caixa.height * ida;
+      const pontoVolta = caixa.top + caixa.height * volta;
+      // A linha divisória de um item é a borda de baixo dele.
+      const linha = (i) => itens.current[i].getBoundingClientRect().bottom;
+
+      let i = atual.current;
+      while (i < quantidade - 1 && itens.current[i] && linha(i) <= pontoIda) i++;
+      while (i > 0 && itens.current[i - 1] && linha(i - 1) >= pontoVolta) i--;
+
+      if (i !== atual.current) {
+        atual.current = i;
+        setAtivo(i);
+      }
+    };
+
+    const aoRolar = () => {
+      if (!quadro) quadro = requestAnimationFrame(medir);
+    };
+
+    medir();
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    window.addEventListener("resize", aoRolar);
+    return () => {
+      window.removeEventListener("scroll", aoRolar);
+      window.removeEventListener("resize", aoRolar);
+      if (quadro) cancelAnimationFrame(quadro);
+    };
+  }, [quantidade, ida, volta]);
+
+  return [ativo, itens, imagem];
+}

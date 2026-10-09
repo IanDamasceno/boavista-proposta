@@ -4,7 +4,7 @@ import Vitrine from "../componentes/Vitrine.jsx";
 import Surgir from "../componentes/Surgir.jsx";
 import Contato from "../componentes/Contato.jsx";
 import Visita from "../componentes/Visita.jsx";
-import { Profundidade, useItemAtivo } from "../componentes/rolagem.jsx";
+import { Profundidade, useTrocaPorLinha } from "../componentes/rolagem.jsx";
 import {
   BV_TOWER,
   EMPREENDIMENTOS,
@@ -72,7 +72,7 @@ export default function Inicio() {
       </section>
 
       {/* ---------- Lançamento em destaque ---------- */}
-      <section className="lancamento" aria-labelledby="titulo-lancamento">
+      <section className="lancamento" id="lancamento" aria-labelledby="titulo-lancamento">
         <div className="largura lancamento-grade">
           <Surgir className="lancamento-texto">
             <p className="rotulo">Lançamento · {BV_TOWER.local}</p>
@@ -169,7 +169,8 @@ export default function Inicio() {
 // Lista de empreendimentos. No computador, a foto fica parada ao lado e troca
 // conforme a rolagem passa por cada item; no celular, cada item leva a sua foto.
 function Empreendimentos() {
-  const [ativo, refs] = useItemAtivo(EMPREENDIMENTOS.length);
+  // Avança quando a linha divisória chega a 50% da imagem; volta quando ela desce a 75%.
+  const [ativo, refs, imagem] = useTrocaPorLinha(EMPREENDIMENTOS.length, 0.5, 0.75);
   const total = String(EMPREENDIMENTOS.length).padStart(2, "0");
 
   return (
@@ -182,7 +183,7 @@ function Empreendimentos() {
 
         <div className="rolagem">
           <div className="rolagem-quadro" aria-hidden="true">
-            <div className="vitrine rolagem-fotos">
+            <div className="vitrine rolagem-fotos" ref={imagem}>
               {EMPREENDIMENTOS.map((e, i) => (
                 <img key={e.slug} src={e.imagem} alt="" className={i === ativo ? "ativa" : ""} style={{ objectPosition: e.foco }} loading="lazy" />
               ))}

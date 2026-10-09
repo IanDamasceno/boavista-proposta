@@ -5,7 +5,8 @@ import { CONTATO, EMPRESA, MENSAGEM_PADRAO, linkWhatsApp } from "../dados/boavis
 
 const MENU = [
   ["Empreendimentos", "/#empreendimentos"],
-  ["BV Tower", "/bv-tower"],
+  // Leva à faixa de lançamentos da página inicial (hoje o BV Tower; os próximos entram lá).
+  ["Lançamento", "/#lancamento"],
   ["A construtora", "/#construtora"],
   ["Contato", "/#contato"],
 ];
