@@ -4,9 +4,8 @@ import Surgir from "../componentes/Surgir.jsx";
 import Icone from "../componentes/Icone.jsx";
 import Contato from "../componentes/Contato.jsx";
 import { Numeros } from "./Inicio.jsx";
-import { BV_TOWER, EMPREENDIMENTOS, NOTA_FORMULARIO, linkWhatsApp } from "../dados/boavista.js";
-
-const PROXIMO = EMPREENDIMENTOS[1];
+import Proximo from "../componentes/Proximo.jsx";
+import { BV_TOWER, NOTA_FORMULARIO, linkWhatsApp } from "../dados/boavista.js";
 
 export default function BvTower() {
   // Cada página tem o seu título de aba.
@@ -173,16 +172,7 @@ export default function BvTower() {
         ]}
       />
 
-      {/* ---------- Próximo empreendimento ---------- */}
-      <section className="proximo">
-        <a className="largura proximo-link" href={PROXIMO.link} target="_blank" rel="noreferrer">
-          <span className="rotulo">Próximo empreendimento</span>
-          <span className="proximo-nome">{PROXIMO.nome}</span>
-          <span className="proximo-meta">
-            {PROXIMO.tipo} · {PROXIMO.bairro} · {PROXIMO.status}
-          </span>
-        </a>
-      </section>
+      <Proximo atual="bv-tower" />
     </>
   );
 }

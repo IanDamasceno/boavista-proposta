@@ -111,7 +111,7 @@ export default function Inicio() {
                     ))}
                   </ul>
                   <LinkEmpreendimento e={e} className="seta-link">
-                    {e.interno ? "Conhecer o " + e.nome : "Ver o " + e.nome}
+                    Conhecer o {e.nome}
                   </LinkEmpreendimento>
                 </div>
               </Surgir>
@@ -122,10 +122,8 @@ export default function Inicio() {
             <h3>Entregues e 100% vendidos</h3>
             <ul>
               {ENTREGUES.map((e) => (
-                <li key={e.nome}>
-                  <a href={e.link} target="_blank" rel="noreferrer">
-                    {e.nome}
-                  </a>
+                <li key={e.slug}>
+                  <Link to={"/empreendimentos/" + e.slug}>{e.nome}</Link>
                   <span>{e.bairro}</span>
                 </li>
               ))}
@@ -177,19 +175,11 @@ export default function Inicio() {
   );
 }
 
-// O BV Tower abre a página interna; os demais abrem a página do projeto no site atual.
 function LinkEmpreendimento({ e, children, ...resto }) {
-  if (e.interno) {
-    return (
-      <Link to={e.interno} {...resto}>
-        {children}
-      </Link>
-    );
-  }
   return (
-    <a href={e.link} target="_blank" rel="noreferrer" {...resto}>
+    <Link to={e.interno} {...resto}>
       {children}
-    </a>
+    </Link>
   );
 }
 

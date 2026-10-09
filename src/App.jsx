@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./componentes/Layout.jsx";
 import Inicio from "./paginas/Inicio.jsx";
 import BvTower from "./paginas/BvTower.jsx";
+import Projeto from "./paginas/Projeto.jsx";
 import NaoEncontrada from "./paginas/NaoEncontrada.jsx";
 
 // Ao trocar de página, volta ao topo (ou rola até a âncora, se houver).
@@ -29,6 +30,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Inicio />} />
           <Route path="/bv-tower" element={<BvTower />} />
+          <Route path="/empreendimentos/:slug" element={<Projeto />} />
           <Route path="*" element={<NaoEncontrada />} />
         </Route>
       </Routes>

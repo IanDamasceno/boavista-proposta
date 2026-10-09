@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Grade de fotos que abre cada imagem em tela cheia (com setas e teclado).
-export default function Galeria({ fotos }) {
+export default function Galeria({ fotos, destaque = true }) {
   const [aberta, setAberta] = useState(null);
   const dialogo = useRef(null);
 
@@ -23,7 +23,7 @@ export default function Galeria({ fotos }) {
 
   return (
     <>
-      <ul className="galeria">
+      <ul className={"galeria" + (destaque ? " com-destaque" : "")}>
         {fotos.map((f, i) => (
           <li key={f.src}>
             <button type="button" onClick={() => setAberta(i)} aria-label={"Ampliar: " + f.nome}>

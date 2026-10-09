@@ -1176,6 +1176,69 @@ textarea {
   }
 }
 
+/* Capa dos residenciais: o nome é mais longo que "BV Tower". */
+.capa h1.capa-nome {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 0.98;
+}
+
+.capa-simples .capa-grade {
+  grid-template-columns: 1fr;
+}
+
+.capa-simples .capa-chamada {
+  max-width: 30ch;
+}
+
+.capa-faixa {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* ---------- Residenciais: apresentação ---------- */
+.apresentacao {
+  display: grid;
+  gap: 1rem;
+}
+
+.apresentacao .cabeca h2 {
+  max-width: 16ch;
+}
+
+.apresentacao-texto p {
+  color: var(--texto-2);
+  font-size: 1.125rem;
+}
+
+.apresentacao + .largura .faixa-imagem {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 900px) {
+  .apresentacao {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+  }
+}
+
+.bloco ul.marcados {
+  margin-top: 0.4rem;
+}
+
+.marcados li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.marcados li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 0.8rem;
+  height: 1px;
+  background: var(--destaque-texto);
+}
+
 /* ---------- BV Tower: para quem é ---------- */
 .publicos {
   display: grid;
@@ -1353,7 +1416,7 @@ textarea {
   gap: 0.75rem;
 }
 
-.galeria li:first-child {
+.galeria.com-destaque li:first-child {
   grid-column: 1 / -1;
 }
 
@@ -1379,7 +1442,7 @@ textarea {
   will-change: transform;
 }
 
-.galeria li:first-child img {
+.galeria.com-destaque li:first-child img {
   aspect-ratio: 1280 / 563;
 }
 
