@@ -27,15 +27,16 @@
 }
 
 :root[data-tema="claro"] {
-  --fundo: #f5f7f8;
-  --fundo-2: #e9eef1;
-  --cartao: #ffffff;
+  /* Tema claro em tons de bege, para não ficar branco demais. */
+  --fundo: #ebe1cf;
+  --fundo-2: #e0d3bc;
+  --cartao: #f4ecdd;
   --texto: #042940;
-  --texto-2: #43596a;
-  --destaque-texto: #3a6020;
-  --linha: rgba(4, 41, 64, 0.17);
+  --texto-2: #3f5362;
+  --destaque-texto: #355a1c;
+  --linha: rgba(4, 41, 64, 0.2);
   --rodape: #031c2c;
-  --campo: #ffffff;
+  --campo: #faf5ea;
   color-scheme: light;
 }
 
@@ -223,14 +224,14 @@ textarea {
 }
 
 .botao.claro {
-  background: #fff;
-  border-color: #fff;
+  background: #f4ecdd;
+  border-color: #f4ecdd;
   color: var(--azul);
 }
 
 .botao.claro:hover {
-  background: #dfe7ec;
-  border-color: #dfe7ec;
+  background: #e0d3bc;
+  border-color: #e0d3bc;
 }
 
 .selo {

@@ -3,7 +3,7 @@
 Protótipo de novo site para a Construtora Boa Vista (Teresina/PI), com a página inicial e a página do BV Tower.
 
 - React + Vite, JavaScript, CSS puro com variáveis (`src/estilos.css`)
-- Tema escuro (padrão) e claro, derivados da paleta do cliente: azul `#042940`, verde `#467326` e o prata da logo
+- Tema escuro (padrão) e claro (em tons de bege), derivados da paleta do cliente: azul `#042940`, verde `#467326` e o prata da logo
 - Sem vídeos: todo o movimento vem de imagens estáticas e CSS
 
 ## Rodar
