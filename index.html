@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#042940" />
+    <title>Construtora Boa Vista | Proposta de novo site</title>
+    <meta name="description" content="Construtora Boa Vista: há mais de 40 anos construindo em Teresina. Conheça os empreendimentos e o BV Tower, o primeiro edifício corporativo de alto padrão da construtora." />
+    <meta property="og:title" content="Construtora Boa Vista | Proposta de novo site" />
+    <meta property="og:description" content="Há mais de 40 anos construindo em Teresina. Conheça o BV Tower, o primeiro edifício corporativo de alto padrão da Boa Vista." />
+    <meta property="og:image" content="/img/bvtower-fachada.jpg" />
+    <script>
+      // Define o tema antes de a página aparecer, para não piscar. Escuro é o padrão.
+      (function () {
+        var tema = "escuro";
+        try {
+          tema = localStorage.getItem("tema") || "escuro";
+        } catch (e) {}
+        document.documentElement.dataset.tema = tema === "claro" ? "claro" : "escuro";
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
