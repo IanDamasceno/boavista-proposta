@@ -1589,3 +1589,759 @@ textarea {
     transform: none;
   }
 }
+
+/* =====================================================================
+   Detalhes de movimento e seções novas
+   ===================================================================== */
+
+:root {
+  --curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- Entrada da página e do topo de cada página ---------- */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes clarear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pagina {
+  animation: clarear 0.5s ease both;
+}
+
+.abertura-texto .rotulo,
+.capa-selos {
+  animation: subir 0.9s 0.05s both var(--curva);
+}
+
+.abertura h1,
+.capa h1 {
+  animation: subir 1s 0.15s both var(--curva);
+}
+
+.abertura-apoio,
+.capa-chamada {
+  animation: subir 1s 0.3s both var(--curva);
+}
+
+.capa-botoes {
+  animation: subir 1s 0.42s both var(--curva);
+}
+
+.abertura-palco,
+.capa-imagem,
+.capa-faixa {
+  animation: subir 1.1s 0.5s both var(--curva);
+}
+
+.capa .numeros {
+  animation: subir 1s 0.65s both var(--curva);
+}
+
+/* ---------- Linha de progresso e cabeçalho ---------- */
+.progresso {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  background: var(--destaque-texto);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.topo::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto 0;
+  height: 22px;
+  background: linear-gradient(rgba(0, 0, 0, 0.22), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.topo.rolou::after {
+  opacity: 1;
+}
+
+:root[data-tema="claro"] .topo::after {
+  background: linear-gradient(rgba(4, 41, 64, 0.12), transparent);
+}
+
+/* Sublinhado do menu que cresce a partir da esquerda. */
+@media (min-width: 881px) {
+  .menu a:not(.botao) {
+    position: relative;
+    border-bottom: 0;
+  }
+
+  .menu a:not(.botao)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--destaque-texto);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--curva);
+  }
+
+  .menu a:not(.botao):hover::after,
+  .menu a:not(.botao):focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Botões: leve subida e brilho que atravessa ---------- */
+.botao {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s, transform 0.3s var(--curva);
+}
+
+.botao::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translate3d(-110%, 0, 0);
+  transition: transform 0.7s var(--curva);
+  pointer-events: none;
+}
+
+.botao:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+.botao:hover::after {
+  transform: translate3d(110%, 0, 0);
+}
+
+/* ---------- Rótulos: o traço cresce quando a seção aparece ---------- */
+.cabeca .rotulo,
+.contato-texto .rotulo,
+.construtora-texto .rotulo,
+.visita-texto .rotulo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cabeca .rotulo::before,
+.contato-texto .rotulo::before,
+.construtora-texto .rotulo::before,
+.visita-texto .rotulo::before {
+  content: "";
+  flex: none;
+  width: 2.2rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s 0.25s var(--curva);
+}
+
+.surgir.visivel .rotulo::before,
+.contato-texto .rotulo::before {
+  transform: scaleX(1);
+}
+
+/* ---------- Cortina: a imagem é descoberta de cima para baixo ---------- */
+.cortina {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.cortina::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: var(--fundo-2);
+  transform-origin: bottom;
+  transition: transform 1.1s 0.15s var(--curva);
+  pointer-events: none;
+}
+
+.surgir.visivel.cortina::after,
+.surgir.visivel .cortina::after {
+  transform: scaleY(0);
+}
+
+.profundidade {
+  will-change: transform;
+}
+
+.lancamento-coluna {
+  display: grid;
+}
+
+/* ---------- Empreendimentos: a foto troca conforme a rolagem ---------- */
+.rolagem-quadro {
+  display: none;
+}
+
+.rolagem-lista {
+  border-top: 1px solid var(--linha);
+}
+
+.rolagem-item {
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+  border-bottom: 1px solid var(--linha);
+}
+
+.rolagem-foto {
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1.4rem;
+  background: var(--fundo-2);
+}
+
+.rolagem-item h3 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: 0.8rem;
+}
+
+.rolagem-item > p:not(.linha-meta) {
+  color: var(--texto-2);
+  max-width: 46ch;
+}
+
+@media (min-width: 960px) {
+  .rolagem {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  .rolagem-quadro {
+    display: block;
+    position: sticky;
+    top: calc(var(--topo) + 2rem);
+  }
+
+  .rolagem-fotos {
+    height: min(68vh, 600px);
+    background: var(--fundo-2);
+  }
+
+  .rolagem-conta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    max-width: none;
+    color: var(--texto-2);
+    font-size: 0.95rem;
+  }
+
+  .rolagem-conta strong {
+    font-family: var(--titulo);
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--texto);
+  }
+
+  .rolagem-conta span {
+    margin-left: auto;
+    font-family: var(--titulo);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  .rolagem-lista {
+    border-top: 0;
+  }
+
+  .rolagem-foto {
+    display: none;
+  }
+
+  .rolagem-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: min(68vh, 600px);
+    padding-block: 2rem;
+    opacity: 0.38;
+    transition: opacity 0.6s ease;
+  }
+
+  .rolagem-item:last-child {
+    border-bottom: 0;
+  }
+
+  .rolagem-item.ativo,
+  .rolagem-item:focus-within {
+    opacity: 1;
+  }
+}
+
+/* Entregues: agora em cartões com imagem. */
+.entregues ul {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  border-top: 0;
+}
+
+.entregues li {
+  display: block;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.entregues a {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.entregues a:hover {
+  text-decoration: none;
+}
+
+.entregue-imagem {
+  display: block;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 0.9rem;
+  overflow: hidden;
+  contain: paint;
+  background: var(--fundo-2);
+}
+
+.entregue-imagem img,
+.noticia-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--curva);
+  will-change: transform;
+}
+
+.entregues a:hover img,
+.noticias a:hover img {
+  transform: scale(1.06);
+}
+
+.entregues strong {
+  font-family: var(--titulo);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+/* ---------- Notícias ---------- */
+.noticias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 2.5rem 2rem;
+}
+
+.noticias a {
+  display: grid;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.noticia-imagem {
+  aspect-ratio: 3 / 2;
+  margin-bottom: 0.6rem;
+  background: var(--fundo-2);
+  contain: paint;
+}
+
+.noticia-data {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--destaque-texto);
+}
+
+.noticia-titulo {
+  font-family: var(--titulo);
+  font-size: 1.4rem;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+
+.noticia-resumo {
+  color: var(--texto-2);
+  font-size: 1rem;
+}
+
+/* ---------- Seções sugeridas: nota no canto com o motivo ---------- */
+.com-sugestao {
+  position: relative;
+}
+
+.sugestao {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.sugestao button {
+  padding: 0.35rem 0.85rem;
+  border: 1px dashed var(--linha);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-2);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  cursor: help;
+}
+
+.sugestao button:hover,
+.sugestao button:focus-visible {
+  border-style: solid;
+  color: var(--texto);
+}
+
+.sugestao [role="tooltip"] {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  width: min(24rem, 100vw - 2.5rem);
+  margin: 0;
+  padding: 1rem 1.15rem;
+  border-radius: var(--raio);
+  background: #f4ecdd;
+  color: #042940;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  text-align: left;
+  box-shadow: 0 16px 36px rgba(2, 12, 18, 0.32);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, -6px, 0);
+  transition: opacity 0.25s, transform 0.25s var(--curva), visibility 0.25s;
+}
+
+.sugestao [role="tooltip"] strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sugestao:hover [role="tooltip"],
+.sugestao:focus-within [role="tooltip"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Em telas estreitas a nota fica acima do título, para não cobri-lo. */
+@media (max-width: 760px) {
+  .sugestao {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .sugestao [role="tooltip"] {
+    right: auto;
+    left: 0;
+  }
+}
+
+/* ---------- Agende uma visita (faixa azul) ---------- */
+.visita {
+  background: var(--faixa-escura);
+  color: #fff;
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.visita .rotulo {
+  color: #b9e497;
+}
+
+.visita-grade {
+  display: grid;
+  gap: 2rem;
+}
+
+.visita-texto h2 {
+  margin-bottom: 1rem;
+}
+
+.visita-texto > p:not(.rotulo) {
+  color: #c9d6de;
+  margin: 0;
+}
+
+.visita .sugestao button {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #c9d6de;
+}
+
+.visita .sugestao button:hover,
+.visita .sugestao button:focus-visible {
+  color: #fff;
+}
+
+.visita-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.visita-form label {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dfe7ec;
+}
+
+.visita-form input,
+.visita-form select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--raio);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 1rem;
+  color-scheme: dark;
+}
+
+.visita-form option {
+  color: #042940;
+  background: #fff;
+}
+
+.visita-form .botao {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.visita :focus-visible {
+  outline-color: #b9e497;
+}
+
+@media (min-width: 1000px) {
+  .visita-grade {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .visita .sugestao {
+    top: -2.6rem;
+  }
+}
+
+/* ---------- Andamento da obra ---------- */
+.andamento {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.andamento-imagem img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.etapas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: etapa;
+}
+
+.etapas li {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 1.5rem;
+  padding: 1rem 0 1rem 2.4rem;
+  border-bottom: 1px solid var(--linha);
+  color: var(--texto-2);
+}
+
+/* Trilho vertical e marcador de cada etapa. */
+.etapas li::before {
+  content: "";
+  position: absolute;
+  left: 0.45rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--linha);
+}
+
+.etapas li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border: 1px solid var(--texto-2);
+  border-radius: 50%;
+  background: var(--fundo);
+}
+
+.etapas li.feita,
+.etapas li.agora {
+  color: var(--texto);
+}
+
+.etapas li.feita::after {
+  border-color: var(--destaque);
+  background: var(--destaque);
+}
+
+.etapas li.agora::after {
+  border-color: var(--destaque-texto);
+  box-shadow: 0 0 0 4px rgba(127, 172, 106, 0.28);
+}
+
+.etapa-nome {
+  font-family: var(--titulo);
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.etapa-situacao {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.etapas li.agora .etapa-situacao {
+  color: var(--destaque-texto);
+}
+
+.andamento-nota {
+  margin: 1.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--texto-2);
+}
+
+@media (min-width: 900px) {
+  .andamento {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+    align-items: center;
+  }
+}
+
+/* ---------- Mapa ---------- */
+.mapa {
+  height: clamp(320px, 52vw, 520px);
+  border: 1px solid var(--linha);
+  background: var(--cartao);
+}
+
+.mapa iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- WhatsApp fixo, acima do botão de tema ---------- */
+.zap-botao {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 4.8rem;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #1f8f4e;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  transition: transform 0.25s var(--curva);
+}
+
+.zap-botao:hover {
+  transform: translate3d(0, -3px, 0);
+}
+
+/* ---------- Pequenos movimentos ao passar o mouse ---------- */
+.diferenciais li {
+  transition: background-color 0.35s;
+}
+
+.diferenciais li:hover {
+  background: var(--fundo-2);
+}
+
+.diferenciais .icone {
+  transition: transform 0.5s var(--curva);
+}
+
+.diferenciais li:hover .icone {
+  transform: translate3d(0, -4px, 0);
+}
+
+.publicos li,
+.valores li {
+  position: relative;
+}
+
+.publicos li::after,
+.valores li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--destaque-texto);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--curva);
+}
+
+.publicos li:hover::after,
+.valores li:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cortina::after,
+  .progresso {
+    display: none;
+  }
+
+  .rolagem-item {
+    opacity: 1;
+  }
+
+  .cabeca .rotulo::before,
+  .construtora-texto .rotulo::before,
+  .visita-texto .rotulo::before {
+    transform: scaleX(1);
+  }
+}

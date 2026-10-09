@@ -3,7 +3,18 @@ import { Link } from "react-router-dom";
 import Vitrine from "../componentes/Vitrine.jsx";
 import Surgir from "../componentes/Surgir.jsx";
 import Contato from "../componentes/Contato.jsx";
-import { BV_TOWER, EMPREENDIMENTOS, ENTREGUES, EMPRESA, HISTORIA, PALAVRAS_TITULO } from "../dados/boavista.js";
+import Visita from "../componentes/Visita.jsx";
+import { Profundidade, useItemAtivo } from "../componentes/rolagem.jsx";
+import {
+  BV_TOWER,
+  EMPREENDIMENTOS,
+  ENTREGUES,
+  EMPRESA,
+  HISTORIA,
+  NOTICIAS,
+  PALAVRAS_TITULO,
+  RESIDENCIAIS,
+} from "../dados/boavista.js";
 
 const IMAGENS = EMPREENDIMENTOS.map((e) => ({ src: e.imagem, alt: e.alt, foco: e.foco }));
 
@@ -76,66 +87,22 @@ export default function Inicio() {
               Conhecer o BV Tower
             </Link>
           </Surgir>
-          <Surgir className="lancamento-imagem zoom" atraso={120}>
-            <img src="/img/bvtower-perspectiva.jpg" alt="Perspectiva lateral do BV Tower, com a torre de salas sobre o embasamento de lojas" width="601" height="606" loading="lazy" />
-          </Surgir>
+          <Profundidade className="lancamento-coluna">
+            <Surgir className="lancamento-imagem zoom" atraso={120}>
+              <img src="/img/bvtower-perspectiva.jpg" alt="Perspectiva lateral do BV Tower, com a torre de salas sobre o embasamento de lojas" width="601" height="606" loading="lazy" />
+            </Surgir>
+          </Profundidade>
         </div>
       </section>
 
-      {/* ---------- Empreendimentos ---------- */}
-      <section className="secao" id="empreendimentos">
-        <div className="largura">
-          <Surgir className="cabeca">
-            <p className="rotulo">Empreendimentos</p>
-            <h2>Do primeiro apartamento ao endereço da sua empresa</h2>
-          </Surgir>
+      <Empreendimentos />
 
-          <ul className="linhas">
-            {EMPREENDIMENTOS.map((e) => (
-              <Surgir como="li" key={e.slug} className="linha">
-                <LinkEmpreendimento e={e} className="linha-imagem zoom" tabIndex={-1} aria-hidden="true">
-                  <img src={e.imagem} alt="" loading="lazy" width="1280" height="563" style={{ objectPosition: e.foco }} />
-                </LinkEmpreendimento>
-                <div className="linha-texto">
-                  <p className="linha-meta">
-                    <span className={"selo " + (e.status === "Lançamento" ? "forte" : "")}>{e.status}</span>
-                    <span>
-                      {e.tipo} · {e.bairro}
-                    </span>
-                  </p>
-                  <h3>{e.nome}</h3>
-                  <p>{e.resumo}</p>
-                  <ul className="linha-dados">
-                    {e.dados.map((d) => (
-                      <li key={d}>{d}</li>
-                    ))}
-                  </ul>
-                  <LinkEmpreendimento e={e} className="seta-link">
-                    Conhecer o {e.nome}
-                  </LinkEmpreendimento>
-                </div>
-              </Surgir>
-            ))}
-          </ul>
-
-          <Surgir className="entregues">
-            <h3>Entregues e 100% vendidos</h3>
-            <ul>
-              {ENTREGUES.map((e) => (
-                <li key={e.slug}>
-                  <Link to={"/empreendimentos/" + e.slug}>{e.nome}</Link>
-                  <span>{e.bairro}</span>
-                </li>
-              ))}
-            </ul>
-          </Surgir>
-        </div>
-      </section>
+      <Visita />
 
       {/* ---------- A construtora ---------- */}
       <section className="secao faixa" id="construtora">
         <div className="largura construtora-grade">
-          <Surgir className="construtora-imagem">
+          <Surgir className="construtora-imagem cortina">
             <img src="/img/historia.jpg" alt="Retrato institucional da Construtora Boa Vista: engenheiro analisa plantas à mesa de trabalho" width="628" height="521" loading="lazy" />
           </Surgir>
           <Surgir className="construtora-texto" atraso={100}>
@@ -158,6 +125,30 @@ export default function Inicio() {
         </div>
       </section>
 
+      {/* ---------- Notícias ---------- */}
+      <section className="secao" id="noticias">
+        <div className="largura">
+          <Surgir className="cabeca">
+            <p className="rotulo">Notícias</p>
+            <h2>O que acontece na Boa Vista</h2>
+          </Surgir>
+          <ul className="noticias">
+            {NOTICIAS.map((n, i) => (
+              <Surgir como="li" key={n.titulo} atraso={i * 90}>
+                <a href={n.link} target="_blank" rel="noreferrer">
+                  <span className="noticia-imagem cortina">
+                    <img src={n.imagem} alt={n.alt} loading="lazy" />
+                  </span>
+                  <span className="noticia-data">{n.data}</span>
+                  <span className="noticia-titulo">{n.titulo}</span>
+                  <span className="noticia-resumo">{n.resumo}</span>
+                </a>
+              </Surgir>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <Contato
         titulo="Fale com a Boa Vista"
         texto="Conte o que você procura. A equipe comercial responde pelo WhatsApp."
@@ -172,6 +163,86 @@ export default function Inicio() {
         ]}
       />
     </>
+  );
+}
+
+// Lista de empreendimentos. No computador, a foto fica parada ao lado e troca
+// conforme a rolagem passa por cada item; no celular, cada item leva a sua foto.
+function Empreendimentos() {
+  const [ativo, refs] = useItemAtivo(EMPREENDIMENTOS.length);
+  const total = String(EMPREENDIMENTOS.length).padStart(2, "0");
+
+  return (
+    <section className="secao" id="empreendimentos">
+      <div className="largura">
+        <Surgir className="cabeca">
+          <p className="rotulo">Empreendimentos</p>
+          <h2>Do primeiro apartamento ao endereço da sua empresa</h2>
+        </Surgir>
+
+        <div className="rolagem">
+          <div className="rolagem-quadro" aria-hidden="true">
+            <div className="vitrine rolagem-fotos">
+              {EMPREENDIMENTOS.map((e, i) => (
+                <img key={e.slug} src={e.imagem} alt="" className={i === ativo ? "ativa" : ""} style={{ objectPosition: e.foco }} loading="lazy" />
+              ))}
+            </div>
+            <p className="rolagem-conta">
+              <strong>{String(ativo + 1).padStart(2, "0")}</strong> / {total}
+              <span>{EMPREENDIMENTOS[ativo].nome}</span>
+            </p>
+          </div>
+
+          <ul className="rolagem-lista">
+            {EMPREENDIMENTOS.map((e, i) => (
+              <li
+                key={e.slug}
+                ref={(el) => (refs.current[i] = el)}
+                data-indice={i}
+                className={"rolagem-item" + (i === ativo ? " ativo" : "")}
+              >
+                <LinkEmpreendimento e={e} className="rolagem-foto zoom" tabIndex={-1} aria-hidden="true">
+                  <img src={e.imagem} alt="" loading="lazy" width="1280" height="563" style={{ objectPosition: e.foco }} />
+                </LinkEmpreendimento>
+                <p className="linha-meta">
+                  <span className={"selo " + (e.status === "Lançamento" ? "forte" : "")}>{e.status}</span>
+                  <span>
+                    {e.tipo} · {e.bairro}
+                  </span>
+                </p>
+                <h3>{e.nome}</h3>
+                <p>{e.resumo}</p>
+                <ul className="linha-dados">
+                  {e.dados.map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
+                <LinkEmpreendimento e={e} className="seta-link">
+                  Conhecer o {e.nome}
+                </LinkEmpreendimento>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <Surgir className="entregues">
+          <h3>Entregues e 100% vendidos</h3>
+          <ul>
+            {ENTREGUES.map((e) => (
+              <li key={e.slug}>
+                <Link to={"/empreendimentos/" + e.slug}>
+                  <span className="entregue-imagem">
+                    <img src={RESIDENCIAIS[e.slug].faixa.src} alt="" loading="lazy" />
+                  </span>
+                  <strong>{e.nome}</strong>
+                  <span>{e.bairro}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Surgir>
+      </div>
+    </section>
   );
 }
 

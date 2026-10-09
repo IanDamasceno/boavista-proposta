@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { Progresso } from "./rolagem.jsx";
 import { CONTATO, EMPRESA, MENSAGEM_PADRAO, linkWhatsApp } from "../dados/boavista.js";
 
 const MENU = [
@@ -24,6 +25,15 @@ export default function Layout() {
     }
   }, [tema]);
 
+  // O cabeçalho ganha sombra depois que a página rola.
+  const [rolou, setRolou] = useState(false);
+  useEffect(() => {
+    const medir = () => setRolou(window.scrollY > 12);
+    medir();
+    window.addEventListener("scroll", medir, { passive: true });
+    return () => window.removeEventListener("scroll", medir);
+  }, []);
+
   // Fecha o menu do celular sempre que a página muda.
   useEffect(() => setAberto(false), [local]);
 
@@ -33,7 +43,9 @@ export default function Layout() {
         Ir para o conteúdo
       </a>
 
-      <header className="topo">
+      <Progresso />
+
+      <header className={"topo" + (rolou ? " rolou" : "")}>
         <div className="largura topo-linha">
           <Link className="marca" to="/" aria-label={EMPRESA.nome + ", página inicial"}>
             <Logo />
@@ -62,7 +74,8 @@ export default function Layout() {
         </div>
       </header>
 
-      <main id="conteudo">
+      {/* A "key" refaz a entrada suave a cada troca de página. */}
+      <main id="conteudo" key={local.pathname} className="pagina">
         <Outlet />
       </main>
 
@@ -118,6 +131,19 @@ export default function Layout() {
           <p>© {new Date().getFullYear()} {EMPRESA.nome}. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      <a
+        className="zap-botao"
+        href={linkWhatsApp(MENSAGEM_PADRAO)}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Falar com a Boa Vista pelo WhatsApp"
+        title="WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+          <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-2.9.8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 3.9c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 1.9 3 4.7 4.1 2.3.9 2.8.7 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-1.9-.9c-.3-.1-.5-.2-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.2Z" />
+        </svg>
+      </a>
 
       <button
         className="tema-botao"

@@ -616,3 +616,71 @@ export function enderecoDaPagina(slug) {
 export function nomeDoEmpreendimento(slug) {
   return slug === "bv-tower" ? BV_TOWER.nome : RESIDENCIAIS[slug].nome;
 }
+
+// ---------- Notícias (as três em destaque no site atual) ----------
+export const NOTICIAS = [
+  {
+    data: "17/04/2026",
+    titulo: "Edifício comercial une tecnologia e elegância em Teresina; obras avançam",
+    resumo: "O BV Tower entra na fase de escavação dos dois subsolos, com fundação em hélice contínua.",
+    imagem: "/img/bvtower-obra.jpg",
+    alt: "Máquinas trabalhando na escavação do terreno do BV Tower",
+    link: SITE_ATUAL + "/noticia?slug=edificio-comercial-une-tecnologia-e-elegancia-em-teresina-obras-avancam",
+  },
+  {
+    data: "19/11/2025",
+    titulo: "Construtora Boa Vista entrega o Carnaúba Palace na zona Leste de Teresina",
+    resumo: "São 114 apartamentos em 22 andares, com um rooftop voltado para uma das vistas mais bonitas da cidade.",
+    imagem: "/img/carnauba-aerea.jpg",
+    alt: "Vista aérea do Carnaúba Palace ao pôr do sol",
+    link: SITE_ATUAL + "/noticia?slug=construtora-boa-vista-entrega-o-carnauba-palace-na-zona-leste-de-teresina",
+  },
+  {
+    data: "03/06/2025",
+    titulo: "Boa Vista firma parceria com o IFPI para soluções tecnológicas na construção civil",
+    resumo: "O projeto de pesquisa busca reduzir resíduos e controlar materiais nas obras, com a participação de estudantes.",
+    imagem: "/img/noticia-ifpi.jpg",
+    alt: "Assinatura do termo de parceria entre a Construtora Boa Vista e o IFPI",
+    link:
+      SITE_ATUAL +
+      "/noticia?slug=construtora-boa-vista-firma-parceria-com-o-ifpi-para-desenvolvimento-de-solucoes-tecnologicas-na-construcao-civil",
+  },
+];
+
+// ---------- Seções sugeridas (não existem no site atual) ----------
+// Cada uma leva no canto a nota abaixo e, ao passar o mouse, o motivo.
+export const NOTA_SUGESTAO = "Seção sugerida";
+
+export const VISITA = {
+  titulo: "Agende uma visita",
+  texto: "Escolha o empreendimento e o melhor dia. A equipe comercial confirma o horário pelo WhatsApp.",
+  periodos: ["Manhã", "Tarde"],
+  motivo:
+    "O site atual só tem um formulário genérico de contato. Um pedido de visita com empreendimento, dia e período chega ao corretor já qualificado e encurta o caminho até o estande.",
+};
+
+// Etapas do BV Tower, conforme a notícia publicada pela construtora em 17/04/2026.
+export const ANDAMENTO = {
+  titulo: "Acompanhe a obra",
+  texto: "As etapas do BV Tower, do lançamento à entrega.",
+  referencia: "Situação informada pela construtora em abril de 2026.",
+  imagem: "/img/bvtower-obra.jpg",
+  alt: "Escavadeiras trabalhando no terreno do BV Tower, já com a contenção das extremidades concluída",
+  etapas: [
+    { nome: "Lançamento", situacao: "Concluído" },
+    { nome: "Contenção do terreno", situacao: "Concluída" },
+    { nome: "Fundação em hélice contínua", situacao: "Em andamento" },
+    { nome: "Escavação dos dois subsolos", situacao: "Em andamento" },
+    { nome: "Estrutura", situacao: "A seguir" },
+    { nome: "Fachada em ACM e vidros espelhados", situacao: "A seguir" },
+    { nome: "Acabamentos e entrega", situacao: "A seguir" },
+  ],
+  motivo:
+    "Quem compra na planta quer ver a obra andar. Uma linha de etapas com foto recente, atualizada pela própria construtora, dá segurança ao comprador e reduz as perguntas ao time de vendas.",
+};
+
+export const MAPA = {
+  titulo: "Como chegar",
+  motivo:
+    "As páginas de projeto do site atual trazem o endereço só em texto. Com o mapa na própria página, o visitante entende a vizinhança e traça a rota sem sair do site.",
+};

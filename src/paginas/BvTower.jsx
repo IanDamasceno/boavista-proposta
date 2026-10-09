@@ -5,7 +5,8 @@ import Icone from "../componentes/Icone.jsx";
 import Contato from "../componentes/Contato.jsx";
 import { Numeros } from "./Inicio.jsx";
 import Proximo from "../componentes/Proximo.jsx";
-import { BV_TOWER, NOTA_FORMULARIO, linkWhatsApp } from "../dados/boavista.js";
+import Sugestao from "../componentes/Sugestao.jsx";
+import { ANDAMENTO, BV_TOWER, NOTA_FORMULARIO, linkWhatsApp } from "../dados/boavista.js";
 
 export default function BvTower() {
   // Cada página tem o seu título de aba.
@@ -106,7 +107,7 @@ export default function BvTower() {
               </Surgir>
             ))}
           </div>
-          <Surgir como="figure" className="faixa-imagem">
+          <Surgir como="figure" className="faixa-imagem cortina">
             <img src="/img/bvtower-lojas.jpg" alt="Perspectiva do embasamento do BV Tower, com as lojas térreas de pé-direito duplo e o letreiro do edifício" width="1280" height="315" loading="lazy" />
             <figcaption>Embasamento do BV Tower, com as lojas voltadas para a rua.</figcaption>
           </Surgir>
@@ -150,8 +151,36 @@ export default function BvTower() {
         </div>
       </section>
 
+      {/* ---------- Andamento da obra (seção sugerida) ---------- */}
+      <section className="secao" id="obra">
+        <div className="largura com-sugestao">
+          <Sugestao id="obra" motivo={ANDAMENTO.motivo} />
+          <Surgir className="cabeca">
+            <p className="rotulo">Andamento</p>
+            <h2>{ANDAMENTO.titulo}</h2>
+            <p>{ANDAMENTO.texto}</p>
+          </Surgir>
+          <div className="andamento">
+            <Surgir como="figure" className="andamento-imagem cortina">
+              <img src={ANDAMENTO.imagem} alt={ANDAMENTO.alt} width="1600" height="1200" loading="lazy" />
+            </Surgir>
+            <div>
+              <ol className="etapas">
+                {ANDAMENTO.etapas.map((e, i) => (
+                  <Surgir como="li" key={e.nome} atraso={i * 70} className={e.situacao === "A seguir" ? "" : e.situacao === "Em andamento" ? "agora" : "feita"}>
+                    <span className="etapa-nome">{e.nome}</span>
+                    <span className="etapa-situacao">{e.situacao}</span>
+                  </Surgir>
+                ))}
+              </ol>
+              <p className="andamento-nota">{ANDAMENTO.referencia}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ---------- Galeria ---------- */}
-      <section className="secao" id="galeria">
+      <section className="secao faixa" id="galeria">
         <div className="largura">
           <Surgir className="cabeca">
             <p className="rotulo">Galeria</p>

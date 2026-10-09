@@ -6,7 +6,8 @@ import Contato from "../componentes/Contato.jsx";
 import Proximo from "../componentes/Proximo.jsx";
 import NaoEncontrada from "./NaoEncontrada.jsx";
 import { Numeros } from "./Inicio.jsx";
-import { RESIDENCIAIS, linkWhatsApp } from "../dados/boavista.js";
+import Sugestao from "../componentes/Sugestao.jsx";
+import { MAPA, RESIDENCIAIS, linkWhatsApp } from "../dados/boavista.js";
 
 // Página de um residencial. Todas usam este mesmo molde; o conteúdo vem de RESIDENCIAIS.
 export default function Projeto() {
@@ -25,6 +26,7 @@ export default function Projeto() {
   if (!p) return <NaoEncontrada />;
 
   const vendido = p.venda === "100% vendido";
+  const endereco = (p.ficha.find(([nome]) => nome === "Endereço") || [])[1];
 
   return (
     // A "key" faz a página recomeçar (animações e formulário) ao ir de um projeto a outro.
@@ -94,7 +96,7 @@ export default function Projeto() {
         </div>
         {p.capa && p.faixa && (
           <div className="largura">
-            <Surgir como="figure" className="faixa-imagem">
+            <Surgir como="figure" className="faixa-imagem cortina">
               <img src={p.faixa.src} alt={p.faixa.alt} width="1280" height="315" loading="lazy" />
               <figcaption>{p.faixa.legenda}</figcaption>
             </Surgir>
@@ -148,9 +150,31 @@ export default function Projeto() {
         </div>
       </section>
 
+      {/* ---------- Mapa (seção sugerida, só quando o site informa o endereço) ---------- */}
+      {endereco && (
+        <section className="secao faixa" id="mapa">
+          <div className="largura com-sugestao">
+            <Sugestao id="mapa" motivo={MAPA.motivo} />
+            <Surgir className="cabeca">
+              <p className="rotulo">Localização</p>
+              <h2>{MAPA.titulo}</h2>
+              <p>{endereco}</p>
+            </Surgir>
+            <Surgir className="mapa">
+              <iframe
+                title={"Mapa: " + p.nome}
+                src={"https://www.google.com/maps?q=" + encodeURIComponent(endereco) + "&output=embed"}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Surgir>
+          </div>
+        </section>
+      )}
+
       {/* ---------- Galeria (só quando há fotos suficientes) ---------- */}
       {p.galeria && (
-        <section className="secao faixa" id="galeria">
+        <section className="secao" id="galeria">
           <div className="largura">
             <Surgir className="cabeca">
               <p className="rotulo">Galeria</p>

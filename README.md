@@ -20,6 +20,10 @@ npm run build
 - `public/img/`: imagens
 - `src/paginas/`: página inicial (`Inicio.jsx`) e BV Tower (`BvTower.jsx`)
 
+## Seções sugeridas
+
+Três seções não existem no site atual e levam a nota "Seção sugerida" no canto, com o motivo ao passar o mouse: "Agende uma visita" (página inicial), "Acompanhe a obra" (BV Tower) e "Como chegar" (residenciais com endereço). Os textos e motivos ficam em `VISITA`, `ANDAMENTO` e `MAPA`, em `src/dados/boavista.js`.
+
 ## Origem do conteúdo
 
 Textos, números e imagens vêm do site atual da construtora (construtoraboavista.com.br): páginas de projeto, home e notícias. Nenhuma imagem de banco e nenhuma imagem gerada por IA.
