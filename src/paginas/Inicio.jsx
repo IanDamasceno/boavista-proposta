@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Vitrine from "../componentes/Vitrine.jsx";
 import Surgir from "../componentes/Surgir.jsx";
 import Contato from "../componentes/Contato.jsx";
+import CartaoNoticia from "../componentes/CartaoNoticia.jsx";
 import Visita from "../componentes/Visita.jsx";
 import { Profundidade, useTrocaPorLinha } from "../componentes/rolagem.jsx";
 import {
@@ -25,9 +26,11 @@ export default function Inicio() {
 
   return (
     <>
-      {/* ---------- Abertura ---------- */}
+      {/* ---------- Abertura: as imagens dos empreendimentos ficam ao fundo e vão trocando ---------- */}
       <section className="abertura">
-        <div className="largura">
+        <Vitrine className="abertura-fundo" imagens={IMAGENS} ativa={ativa} aoTrocar={trocar} intervalo={6500} />
+        <div className="abertura-sombra" aria-hidden="true" />
+        <div className="largura abertura-conteudo">
           <div className="abertura-texto">
             <p className="rotulo">{EMPRESA.nome} · Teresina, Piauí</p>
             <h1>
@@ -40,33 +43,27 @@ export default function Inicio() {
           </div>
 
           <div className="abertura-palco">
+            <div className="abertura-legenda">
+              <p>
+                <strong>{atual.nome}</strong>
+                <span>
+                  {atual.tipo} · {atual.bairro} · {atual.status}
+                </span>
+              </p>
+              <LinkEmpreendimento e={atual} className="seta-link">
+                Conhecer
+              </LinkEmpreendimento>
+            </div>
             <ul className="abertura-lista" aria-label="Empreendimentos em destaque">
               {EMPREENDIMENTOS.map((e, i) => (
                 <li key={e.slug}>
                   <button type="button" className={i === ativa ? "ativo" : ""} aria-pressed={i === ativa} onClick={() => setAtiva(i)}>
                     <span className="abertura-nome">{e.nome}</span>
-                    <span className="abertura-meta">
-                      {e.bairro} · {e.status}
-                    </span>
+                    <span className="abertura-meta">{e.status}</span>
                   </button>
                 </li>
               ))}
             </ul>
-
-            <div className="abertura-quadro">
-              <Vitrine imagens={IMAGENS} ativa={ativa} aoTrocar={trocar} intervalo={6500} />
-              <div className="abertura-legenda">
-                <p>
-                  <strong>{atual.nome}</strong>
-                  <span>
-                    {atual.tipo} · {atual.bairro} · {atual.status}
-                  </span>
-                </p>
-                <LinkEmpreendimento e={atual} className="seta-link">
-                  Conhecer
-                </LinkEmpreendimento>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -99,7 +96,7 @@ export default function Inicio() {
 
       <Visita />
 
-      {/* ---------- A construtora ---------- */}
+      {/* ---------- A construtora (resumo; a história completa tem página própria) ---------- */}
       <section className="secao faixa" id="construtora">
         <div className="largura construtora-grade">
           <Surgir className="construtora-imagem cortina">
@@ -111,38 +108,29 @@ export default function Inicio() {
             {HISTORIA.paragrafos.map((p) => (
               <p key={p}>{p}</p>
             ))}
+            <Link className="botao contorno" to="/a-construtora">
+              Conhecer a construtora
+            </Link>
           </Surgir>
-        </div>
-        <div className="largura">
-          <ul className="valores">
-            {HISTORIA.valores.map((v, i) => (
-              <Surgir como="li" key={v.titulo} atraso={i * 80}>
-                <h3>{v.titulo}</h3>
-                <p>{v.texto}</p>
-              </Surgir>
-            ))}
-          </ul>
         </div>
       </section>
 
-      {/* ---------- Notícias ---------- */}
+      {/* ---------- Notícias (as três mais recentes) ---------- */}
       <section className="secao" id="noticias">
         <div className="largura">
-          <Surgir className="cabeca">
-            <p className="rotulo">Notícias</p>
-            <h2>O que acontece na Boa Vista</h2>
+          <Surgir className="cabeca cabeca-com-link">
+            <div>
+              <p className="rotulo">Notícias</p>
+              <h2>O que acontece na Boa Vista</h2>
+            </div>
+            <Link className="seta-link" to="/noticias">
+              Todas as notícias
+            </Link>
           </Surgir>
           <ul className="noticias">
-            {NOTICIAS.map((n, i) => (
-              <Surgir como="li" key={n.titulo} atraso={i * 90}>
-                <a href={n.link} target="_blank" rel="noreferrer">
-                  <span className="noticia-imagem cortina">
-                    <img src={n.imagem} alt={n.alt} loading="lazy" />
-                  </span>
-                  <span className="noticia-data">{n.data}</span>
-                  <span className="noticia-titulo">{n.titulo}</span>
-                  <span className="noticia-resumo">{n.resumo}</span>
-                </a>
+            {NOTICIAS.slice(0, 3).map((n, i) => (
+              <Surgir como="li" key={n.slug} atraso={i * 90}>
+                <CartaoNoticia noticia={n} />
               </Surgir>
             ))}
           </ul>

@@ -7,7 +7,8 @@ const MENU = [
   ["Empreendimentos", "/#empreendimentos"],
   // Leva à faixa de lançamentos da página inicial (hoje o BV Tower; os próximos entram lá).
   ["Lançamento", "/#lancamento"],
-  ["A construtora", "/#construtora"],
+  ["A construtora", "/a-construtora"],
+  ["Notícias", "/noticias"],
   ["Contato", "/#contato"],
 ];
 

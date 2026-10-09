@@ -1,6 +1,6 @@
 # Construtora Boa Vista: proposta de novo site
 
-Protótipo de novo site para a Construtora Boa Vista (Teresina/PI), com a página inicial e a página do BV Tower.
+Protótipo de novo site para a Construtora Boa Vista (Teresina/PI): página inicial, BV Tower, uma página por residencial, a página da construtora e as notícias.
 
 - React + Vite, JavaScript, CSS puro com variáveis (`src/estilos.css`)
 - Tema escuro (padrão) e claro (branco, azul e verde do site atual, com bege nas faixas e cartões), derivados da paleta do cliente: azul `#042940`, verde `#467326` e o prata da logo
@@ -18,7 +18,8 @@ npm run build
 
 - `src/dados/boavista.js`: todos os dados do cliente (contatos, empreendimentos, textos e números do BV Tower)
 - `public/img/`: imagens
-- `src/paginas/`: página inicial (`Inicio.jsx`) e BV Tower (`BvTower.jsx`)
+- `src/paginas/`: início (`Inicio.jsx`), BV Tower (`BvTower.jsx`), residenciais (`Projeto.jsx`), construtora (`Construtora.jsx`), lista de notícias (`Noticias.jsx`) e matéria (`Noticia.jsx`)
+- Efeito dos empreendimentos na página inicial: `useTrocaPorLinha` em `src/componentes/rolagem.jsx` (a foto avança quando a linha divisória chega a 50% da imagem e volta quando desce a 75%)
 
 ## Seções sugeridas
 

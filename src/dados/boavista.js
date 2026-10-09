@@ -617,35 +617,220 @@ export function nomeDoEmpreendimento(slug) {
   return slug === "bv-tower" ? BV_TOWER.nome : RESIDENCIAIS[slug].nome;
 }
 
-// ---------- Notícias (as três em destaque no site atual) ----------
+// ---------- Notícias (todas as do site atual, da mais recente para a mais antiga) ----------
+// Os textos foram reescritos a partir das matérias publicadas pela construtora.
+// "empreendimento" liga a notícia à página do projeto, quando houver.
 export const NOTICIAS = [
   {
+    slug: "bv-tower-obras-avancam",
     data: "17/04/2026",
     titulo: "Edifício comercial une tecnologia e elegância em Teresina; obras avançam",
     resumo: "O BV Tower entra na fase de escavação dos dois subsolos, com fundação em hélice contínua.",
     imagem: "/img/bvtower-obra.jpg",
     alt: "Máquinas trabalhando na escavação do terreno do BV Tower",
-    link: SITE_ATUAL + "/noticia?slug=edificio-comercial-une-tecnologia-e-elegancia-em-teresina-obras-avancam",
+    texto: [
+      "O BV Tower, novo empreendimento comercial da Construtora Boa Vista, já está em construção em Teresina. O projeto é voltado para salas comerciais e corporativas e, segundo o empresário Francisco Reinaldo, nasceu para atender à demanda por espaços empresariais na capital. A procura depois do lançamento ficou acima do que a construtora esperava.",
+      "A obra está na fase inicial, com escavação e preparação do terreno. O edifício terá dois subsolos, e a contenção das extremidades do terreno já foi concluída. De acordo com o engenheiro Victor Laurence, a fundação usa estacas em hélice contínua, técnica que permite um trabalho rápido e reduz a vibração e a sujeira para a vizinhança.",
+      "O prédio será destinado exclusivamente a atividades comerciais. Terá fachada principal em ACM e alumínio, com vidros espelhados, recepção entregue decorada e sete elevadores.",
+    ],
+    citacao: {
+      texto: "Esse empreendimento vai se tornar realmente um endereço nobre para quem quiser ter a sua empresa.",
+      autor: "Francisco Reinaldo, Construtora Boa Vista",
+    },
+    fonte: "Matéria publicada no cidadeverde.com",
+    empreendimento: "bv-tower",
   },
   {
+    slug: "entrega-do-carnauba-palace",
     data: "19/11/2025",
     titulo: "Construtora Boa Vista entrega o Carnaúba Palace na zona Leste de Teresina",
     resumo: "São 114 apartamentos em 22 andares, com um rooftop voltado para uma das vistas mais bonitas da cidade.",
     imagem: "/img/carnauba-aerea.jpg",
     alt: "Vista aérea do Carnaúba Palace ao pôr do sol",
-    link: SITE_ATUAL + "/noticia?slug=construtora-boa-vista-entrega-o-carnauba-palace-na-zona-leste-de-teresina",
+    texto: [
+      "A Construtora Boa Vista entregou o Carnaúba Palace, na Avenida Noronha Almeida, no bairro São João. O condomínio fica perto de centros de conveniência, serviços e opções de lazer, com acesso facilitado ao Centro e à zona Leste.",
+      "O Carnaúba Palace tem 114 apartamentos de 68 m², com 3 quartos (sendo uma suíte), banheiro social, sala e cozinha. O prédio tem 22 andares, 3 elevadores e uma área de lazer completa, com salão de festas, playground e um rooftop com uma das vistas mais bonitas da cidade.",
+      "Responsável pela obra, o engenheiro Victor Laurence destacou o acabamento, o respeito aos prazos e o cuidado em cada detalhe da construção.",
+    ],
+    citacao: {
+      texto: "A entrega de mais um condomínio representa uma grande emoção para todos nós. Cada etapa concluída é motivo de satisfação, tanto para a equipe quanto para os clientes.",
+      autor: "Francisco Reinaldo, diretor da construtora",
+    },
+    fonte: "Matéria publicada no cidadeverde.com",
+    empreendimento: "carnauba-palace",
   },
   {
+    slug: "parceria-com-o-ifpi",
     data: "03/06/2025",
     titulo: "Boa Vista firma parceria com o IFPI para soluções tecnológicas na construção civil",
     resumo: "O projeto de pesquisa busca reduzir resíduos e controlar materiais nas obras, com a participação de estudantes.",
     imagem: "/img/noticia-ifpi.jpg",
     alt: "Assinatura do termo de parceria entre a Construtora Boa Vista e o IFPI",
-    link:
-      SITE_ATUAL +
-      "/noticia?slug=construtora-boa-vista-firma-parceria-com-o-ifpi-para-desenvolvimento-de-solucoes-tecnologicas-na-construcao-civil",
+    texto: [
+      "Em solenidade realizada no dia 27 de maio, durante a posse da nova diretoria do Centro das Indústrias do Estado do Piauí (CIEPI), a Construtora Boa Vista firmou um termo de parceria com o Instituto Federal do Piauí (IFPI) para participar de um projeto de pesquisa voltado ao desenvolvimento de jovens estudantes.",
+      "O projeto tem como foco a criação de soluções tecnológicas para a minimização de resíduos e o controle de materiais na construção civil. A parceria também contempla tecnologias da Indústria 4.0, como Internet das Coisas, Inteligência Artificial e análise de dados.",
+      "O convênio aproxima o setor educacional do setor produtivo, com oportunidades de aprendizado prático e incentivo à pesquisa. O termo foi assinado pelo diretor da construtora, Reinaldo Filho.",
+    ],
+    citacao: {
+      texto: "Essa parceria com o IFPI representa mais do que um projeto de pesquisa. É uma aposta no futuro dos nossos jovens e na construção civil do amanhã.",
+      autor: "Reinaldo Filho, diretor da Construtora Boa Vista",
+    },
+  },
+  {
+    slug: "caramelo-e-mel",
+    data: "22/05/2025",
+    titulo: "Uma história de resgate, afeto e parceria: Caramelo e Mel, as pets da Construtora Boa Vista",
+    resumo: "As duas cadelinhas chegaram durante a obra do Bosque São Cristóvão e viraram mascotes da equipe.",
+    imagem: "/img/noticia-pets.jpg",
+    alt: "Colaborador da Boa Vista segura três filhotes no colo",
+    foco: "50% 35%",
+    texto: [
+      "Nem só de concreto, tijolos e cimento se constroem grandes histórias. Enquanto nascia o condomínio Bosque São Cristóvão, duas cadelinhas abandonadas chegaram ao canteiro de obras e foram acolhidas por toda a equipe.",
+      "Caramelo e Mel ganharam nomes, ração, caminhas, idas ao veterinário e muito carinho. A engenheira Ana Carolina Veiga assumiu a rotina das pets. Quando Mel teve seis filhotes, todos foram rapidamente adotados por colaboradores.",
+      "Hoje, Caramelo e Mel vivem no Bosque dos Ipês, aproveitando a tranquilidade do espaço antes mesmo dos futuros moradores.",
+    ],
+    citacao: {
+      texto: "Caramelo e Mel trazem leveza e amor ao nosso dia a dia.",
+      autor: "Ana Carolina Veiga, engenheira",
+    },
+  },
+  {
+    slug: "entrega-antecipada-do-bosque-sao-cristovao",
+    data: "28/01/2025",
+    titulo: "Boa Vista antecipa a entrega do Bosque São Cristóvão e celebra a concretização de sonhos",
+    resumo: "As chaves foram entregues oito meses antes do prazo, em um jantar com moradores, colaboradores e parceiros.",
+    imagem: "/img/noticia-entrega-sao-cristovao.jpg",
+    alt: "Apresentação musical no jantar de entrega do Bosque São Cristóvão",
+    texto: [
+      "A Construtora Boa Vista entregou as chaves dos apartamentos do Bosque São Cristóvão com oito meses de antecedência. A entrega foi marcada por um jantar festivo, que reuniu moradores, colaboradores e parceiros ao som do grupo Melhor de Três, formado por Soraia Castelo Branco, Flávio Moura e João Cláudio, cantores que protagonizaram a campanha de lançamento do empreendimento.",
+      "Entre os novos moradores, a antecipação do prazo, a qualidade na vistoria e o atendimento no pós-venda foram os pontos mais lembrados.",
+      "Para o diretor Francisco Reinaldo, o resultado reflete o empenho de toda a equipe e deve se repetir no segundo empreendimento da linha de bosques, o Bosque dos Ipês, que já está em obras.",
+    ],
+    citacao: {
+      texto: "Emoção muito grande em receber o nosso apartamento 8 meses antes do prazo. Esse foi um dos pontos que fez a gente escolher a Construtora Boa Vista.",
+      autor: "Marcella Araújo, moradora do Bosque São Cristóvão",
+    },
+    empreendimento: "bosque-sao-cristovao",
+  },
+  {
+    slug: "inicio-das-obras-do-bosque-dos-ipes",
+    data: "21/10/2024",
+    titulo: "Início das obras do Bosque dos Ipês",
+    resumo: "A primeira fase é a cravação das estacas de concreto. Antes das máquinas, os vizinhos receberam uma muda de ipê.",
+    imagem: "/img/noticia-obras-ipes.jpg",
+    alt: "Colaboradores da Boa Vista entregam uma cesta com uma muda de ipê a um vizinho da obra",
+    texto: [
+      "Começou a construção do Bosque dos Ipês. Segundo o diretor Francisco Reinaldo, a fase inicial é a cravação das estacas de concreto que darão sustentação aos prédios, um processo que conta com uma moderna tecnologia finlandesa e reduz os ruídos gerados durante a obra.",
+      "Antes mesmo do início dos trabalhos, os vizinhos receberam a visita de colaboradores, que levaram uma cesta de lanche e uma muda de ipê, árvore símbolo do projeto. A Boa Vista se colocou à disposição da vizinhança para os transtornos comuns a uma obra de grande porte.",
+      "O empreendimento deixará o bairro São Cristóvão mais bonito e mais acolhedor, com uma área verde de cerca de 600 m².",
+    ],
+    citacao: {
+      texto: "Nosso compromisso vai além de erguer edificações. O Bosque dos Ipês será um exemplo de integração entre as pessoas, a modernidade e a natureza.",
+      autor: "Francisco Reinaldo, diretor da construtora",
+    },
+    empreendimento: "bosque-dos-ipes",
+  },
+  {
+    slug: "sky-center",
+    data: "29/08/2024",
+    titulo: "Sky Center",
+    resumo: "Um prédio de salas comerciais com um café no 15º andar e piso de vidro sobre a cidade.",
+    imagem: "/img/noticia-skycenter.jpg",
+    alt: "Perspectiva do Sky Center, edifício comercial com fachada de vidro",
+    texto: [
+      "Mirantes e decks de vidro, que dão a sensação de flutuar sobre a cidade, são uma tendência mundial. Inspirada em espaços como o Skydeck, em Chicago, e o Sampa Sky, em São Paulo, a Construtora Boa Vista anunciou que vai trazer essa experiência para Teresina.",
+      "O Sky Center será um prédio de salas comerciais com tecnologia de ponta, incluindo elevadores de última geração. Os espaços comerciais terão até 60 m² e serão revestidos com vidros térmicos especiais.",
+      "No 15º andar, um café permitirá ao visitante fazer fotos sobre um piso de vidro, com vista para as avenidas Nossa Senhora de Fátima e Dom Severino.",
+    ],
+  },
+  {
+    slug: "sustentabilidade-na-boa-vista",
+    data: "18/06/2024",
+    titulo: "Sustentabilidade na Construtora Boa Vista",
+    resumo: "Do projeto Obra Limpa à preservação de 40 árvores de 26 espécies em um único condomínio.",
+    imagem: "/img/noticia-sustentabilidade.jpg",
+    alt: "Tambores coloridos para a separação de metal, madeira, papel e plástico em um canteiro de obras",
+    texto: [
+      "Muito antes de a sustentabilidade virar pauta ou prática obrigatória, a Boa Vista já a adotava por escolha. A empresa investiu no projeto Obra Limpa, com o descarte responsável dos resíduos sólidos. O compromisso é lembrado toda semana: às sextas-feiras, os colaboradores usam uniformes verdes.",
+      "A preservação de árvores nativas é outra marca dos projetos. Na década de 90, a construção do São Cristóvão Park, na Zona Leste de Teresina, priorizou a conservação de 40 árvores de 26 espécies.",
+      "Os clientes também participam: no Bosque São Cristóvão e no Brisa Sul, as famílias levaram as crianças para plantar árvores nos condomínios.",
+    ],
+  },
+  {
+    slug: "casacor-piaui",
+    data: "26/05/2024",
+    titulo: "CASACOR Piauí",
+    resumo: "A Boa Vista levou um estande à primeira edição da mostra no estado e apresentou seus lançamentos.",
+    imagem: "/img/noticia-casacor.jpg",
+    alt: "Estande da Construtora Boa Vista na CASACOR Piauí, com jardim vertical na fachada",
+    texto: [
+      "A mostra de arquitetura, arte, paisagismo e design de interiores chegou ao Piauí em 2024 e ficou aberta ao público de 16 de maio a 30 de junho, em um casarão na avenida Zequinha Freire, no bairro Santa Isabel, transformado pelo arquiteto Gustavo Almeida.",
+      "A Construtora Boa Vista esteve presente com um estande próprio, onde conversou com os visitantes, mostrou o portfólio e apresentou empreendimentos como o Bosque dos Ipês e o Sky Center.",
+    ],
+    citacao: {
+      texto: "Foi uma experiência indescritível em que pudemos dialogar com os visitantes, mostrar o nosso portfólio e lançar empreendimentos.",
+      autor: "Francisco Reinaldo, fundador da Boa Vista",
+    },
+  },
+  {
+    slug: "cantos-e-encantos-podcast",
+    data: "02/04/2024",
+    titulo: "Boa Vista no \"Cantos e Encantos Podcast\"",
+    resumo: "O fundador Francisco Reinaldo conta curiosidades e bastidores da construtora.",
+    imagem: "/img/noticia-podcast.jpg",
+    alt: "Logotipo do Cantos e Encantos Podcast",
+    texto: [
+      "O fundador da Construtora Boa Vista, Francisco Reinaldo, gosta de uma boa conversa. Sempre que pode, está com clientes, colaboradores e parceiros, trocando ideias, ouvindo opiniões e contando histórias.",
+      "A convite da empresária e parceira Rosângela Castro, ele participou do \"Cantos e Encantos Podcast\", onde contou curiosidades e bastidores do trabalho e apresentou o universo Boa Vista.",
+    ],
+    video: "https://www.youtube.com/embed/G61cWhePVDg",
   },
 ];
+
+// ---------- Página "A construtora" ----------
+export const CONSTRUTORA = {
+  titulo: "Há mais de 40 anos realizando sonhos",
+  apoio: "Uma história contada tijolo por tijolo, em um movimento de construção constante.",
+  historia: [
+    "A Construtora Boa Vista começou a partir do desafio de aprender a empreender. Com ele vieram duas lições: sonhar alto e realizar os sonhos de quem acreditou na empresa. As duas primeiras edificações, duas residências na zona Norte de Teresina, foram concluídas com tanto entusiasmo que se tornaram a base de um portfólio rico em experiências e histórias de vida.",
+    "São histórias vividas pelo fundador, o engenheiro Francisco Reinaldo, pelos muitos colaboradores e parceiros e, principalmente, pelos milhares de clientes. Pensando em cada um deles, a construtora acompanhou as tendências de várias décadas: as primeiras casas viraram condomínios, obras públicas, edifícios com apartamentos de alto padrão, condomínios clube e os atuais bosques que cercam torres de apartamentos.",
+    "De tijolo em tijolo, a Boa Vista também construiu valores intangíveis. É a construtora que cresceu sem abrir mão da boa conversa acompanhada de um cafezinho, e que trata os clientes como amigos. É 100% piauiense e faz questão de homenagear o estado no nome de cada empreendimento.",
+    "As práticas viraram uma cultura de pertencimento, de amor ao Piauí e de respeito ao meio ambiente. Na responsabilidade social, vieram os cursos de formação na área da construção e o espaço aberto para as mulheres dentro dos canteiros de obra.",
+  ],
+  obraLimpa: {
+    titulo: "Obra Limpa",
+    chamada: "O que fazer com tantos resíduos sólidos gerados nos canteiros de obra?",
+    texto: [
+      "Foi com essa pergunta que a diretoria passou a olhar para ferros, plásticos, madeiras, gessos, papéis e papelões com uma preocupação real: a sustentabilidade. Para gerar bem-estar para as famílias em seus lares, era preciso também cuidar do planeta.",
+      "Assim, muito antes de a Política Nacional de Resíduos Sólidos ser criada, em 2010, a Construtora Boa Vista já colocava em prática o Projeto Obra Limpa, um minucioso protocolo de coleta seletiva nos canteiros.",
+      "A partir daí, um grande volume de resíduos de difícil decomposição passou a ter o destino certo. Pedaços de ferro, por exemplo, passaram a ser reciclados: deixaram de ser lixo para virar matéria-prima de grande valor.",
+    ],
+    imagem: "/img/obra-limpa-canteiro.jpg",
+    alt: "Baias de coleta seletiva em um canteiro de obras da Boa Vista, com o selo Obra Limpa",
+  },
+  crencas: [
+    {
+      titulo: "Missão",
+      texto: "Realizar sonhos ao construir espaços inovadores e sustentáveis que integrem tecnologia de ponta, respeitem o meio ambiente e contribuam significativamente para o desenvolvimento do estado.",
+    },
+    {
+      titulo: "Visão",
+      texto: "Ser referência no setor da construção civil, liderando processos relacionados a inovação e sustentabilidade no Brasil, buscando evolução e inovação contínua.",
+    },
+  ],
+  valores: [
+    "Inovação",
+    "Respeito",
+    "Segurança",
+    "Integridade",
+    "Sustentabilidade",
+    "Compromisso com o desenvolvimento social",
+    "Qualidade e excelência",
+    "Transparência e ética",
+    "Compromisso com os prazos",
+    "Amor ao Piauí",
+  ],
+};
 
 // ---------- Seções sugeridas (não existem no site atual) ----------
 // Cada uma leva no canto a nota abaixo e, ao passar o mouse, o motivo.

@@ -4,6 +4,9 @@ import Layout from "./componentes/Layout.jsx";
 import Inicio from "./paginas/Inicio.jsx";
 import BvTower from "./paginas/BvTower.jsx";
 import Projeto from "./paginas/Projeto.jsx";
+import Construtora from "./paginas/Construtora.jsx";
+import Noticias from "./paginas/Noticias.jsx";
+import Noticia from "./paginas/Noticia.jsx";
 import NaoEncontrada from "./paginas/NaoEncontrada.jsx";
 
 // Ao trocar de página, volta ao topo (ou rola até a âncora, se houver).
@@ -31,6 +34,9 @@ export default function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/bv-tower" element={<BvTower />} />
           <Route path="/empreendimentos/:slug" element={<Projeto />} />
+          <Route path="/a-construtora" element={<Construtora />} />
+          <Route path="/noticias" element={<Noticias />} />
+          <Route path="/noticias/:slug" element={<Noticia />} />
           <Route path="*" element={<NaoEncontrada />} />
         </Route>
       </Routes>
