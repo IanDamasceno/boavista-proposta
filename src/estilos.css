@@ -5,6 +5,7 @@
   --azul: #042940;
   --verde: #467326;
   --prata: #a8aaac;
+  --bege: #ead9bb; /* toque de bege sobre os fundos escuros */
 
   --fundo: #07151e;
   --fundo-2: #0b1e2a;
@@ -27,16 +28,17 @@
 }
 
 :root[data-tema="claro"] {
-  /* Tema claro em tons de bege, para não ficar branco demais. */
-  --fundo: #ebe1cf;
-  --fundo-2: #e0d3bc;
-  --cartao: #f4ecdd;
+  /* As cores do site atual da Boa Vista (branco, azul-escuro e verde),
+     com bege nas faixas alternadas e nos cartões. */
+  --fundo: #ffffff;
+  --fundo-2: #efe6d6;
+  --cartao: #f7f1e6;
   --texto: #042940;
-  --texto-2: #3f5362;
-  --destaque-texto: #355a1c;
-  --linha: rgba(4, 41, 64, 0.2);
+  --texto-2: #43596a;
+  --destaque-texto: #3a6020;
+  --linha: rgba(4, 41, 64, 0.18);
   --rodape: #031c2c;
-  --campo: #faf5ea;
+  --campo: #ffffff;
   color-scheme: light;
 }
 
@@ -224,14 +226,14 @@ textarea {
 }
 
 .botao.claro {
-  background: #f4ecdd;
-  border-color: #f4ecdd;
+  background: var(--bege);
+  border-color: var(--bege);
   color: var(--azul);
 }
 
 .botao.claro:hover {
-  background: #e0d3bc;
-  border-color: #e0d3bc;
+  background: #fff;
+  border-color: #fff;
 }
 
 .selo {
@@ -641,6 +643,7 @@ textarea {
   font-size: clamp(1.3rem, 2.2vw, 1.75rem);
   line-height: 1.25;
   margin: 1rem 0 1.4rem;
+  color: var(--bege);
 }
 
 .lancamento-texto > p:not(.rotulo):not(.lancamento-chamada) {
@@ -1410,6 +1413,10 @@ textarea {
   }
 }
 
+:root[data-tema="claro"] .faixa .bloco {
+  background: #ffffff;
+}
+
 /* ---------- Galeria ---------- */
 .galeria {
   display: grid;
@@ -1525,12 +1532,12 @@ textarea {
 
 /* ---------- Faixa final ---------- */
 .proximo {
-  background: var(--faixa-escura);
+  background: var(--verde);
   color: #fff;
 }
 
 .proximo .rotulo {
-  color: #b9e497;
+  color: #f4e8d2;
   margin: 0;
 }
 
@@ -1553,7 +1560,7 @@ textarea {
 }
 
 .proximo-meta {
-  color: #c9d6de;
+  color: #f4e8d2;
 }
 
 .nao-encontrada {
