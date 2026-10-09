@@ -38,3 +38,5 @@ Imagens do BV Tower (todas do servidor da própria construtora):
 - Renders em alta resolução do BV Tower (os do site têm no máximo 1280 px de largura), lobby, sala modelo e vista aérea
 - Plantas das salas e implantação das lojas
 - Previsão de entrega e número de pavimentos (não constam no site)
+
+Publicação: Vercel, a partir da branch `main`.
